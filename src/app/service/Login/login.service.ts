@@ -12,7 +12,7 @@ export class LoginService {
   ) { }
   login(usuario:string, password:string ): Observable<any>{
 
-    let url= 'http://54.74.123.213:8080/autenticar';
+    let url= 'https://54.74.123.213:8080/autenticar';
     let params = new HttpParams();
 
     params = params.append('usuario', usuario);
