@@ -13,7 +13,7 @@ export class RegistarService {
   ) { }
 
   registrar(cliente: Cliente): Observable<any>{
-    let url = 'http://34.242.19.232:8080/registrar';
+    let url = 'http://54.74.123.213:8080/registrar';
     return this.http.post(url, cliente)
   }
 }

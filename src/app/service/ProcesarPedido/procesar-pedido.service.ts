@@ -13,19 +13,19 @@ export class ProcesarPedidoService {
   ) { }
 
   categorias():Observable<any> {
-    let url = 'http://34.242.19.232:8084/categorias';
+    let url = 'http://54.74.123.213:8084/categorias';
     return this.http.get(url);
   }
 
   productosCategorias(idCategoria:number):Observable<any> {
-    let url = 'http://34.242.19.232:8084/productos';
+    let url = 'http://54.74.123.213:8084/productos';
     let params = new HttpParams();
     params = params.append('idCategoria', idCategoria);
     return this.http.get(url,{"params":params});
   }
 
   enviarPedido(cesta: CestaItem[], usuario:string):Observable<any>{
-    let url = 'http://34.242.19.232:8002/pedido';
+    let url = 'http://54.74.123.213:8002/pedido';
     let params= new HttpParams();
     params=params.append("usuario", usuario)
     return this.http.post(url,cesta,{"params":params})
