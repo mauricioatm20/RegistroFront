@@ -1,19 +1,21 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente } from '../../model/Cliente';
+
+const BASE_URL = 'http://63.33.204.79'; // Define la base del backend
+const HEADERS = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistarService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  private url = `${BASE_URL}:8080/registrar`;
 
-  registrar(cliente: Cliente): Observable<any>{
-    let url = 'http://54.74.123.213:8080/registrar';
-    return this.http.post(url, cliente)
+  constructor(private http: HttpClient) {}
+
+  registrar(cliente: Cliente): Observable<any> {
+    return this.http.post(this.url, cliente, { headers: HEADERS, withCredentials: true });
   }
 }

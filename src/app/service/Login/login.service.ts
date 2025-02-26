@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -7,16 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
+  private url= 'https://63.33.204.79:8080/autenticar';
+
   constructor(
    private http: HttpClient
   ) { }
-  login(usuario:string, password:string ): Observable<any>{
+ login(usuario: string, password: string): Observable<any> {
+    const body = { usuario, password };
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    let url= 'https://54.74.123.213:8080/autenticar';
-    let params = new HttpParams();
-
-    params = params.append('usuario', usuario);
-    params = params.append('password', password);
-    return this.http.get(url, {params: params});
+    return this.http.post(this.url, body, { headers, withCredentials: true });
   }
 }

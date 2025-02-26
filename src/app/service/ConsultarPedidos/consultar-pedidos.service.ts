@@ -1,20 +1,21 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
+
+const BASE_URL = 'http://63.33.204.79:8002'; // Define la base del backend
+const HEADERS = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConsultarPedidosService {
+  private pedidosUrl = `${BASE_URL}/pedidos`;
 
-  constructor(
-    private http:HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
-  consultarPedidos(usuario:string):Observable<any>{
-    let url = "http://51.20.126.221:8002/pedidos"
-    let params = new HttpParams();
-    params = params.append("usuario", usuario);
-    return this.http.get(url,{"params":params})
+  consultarPedidos(usuario: string): Observable<any> {
+    const params = new HttpParams().set('usuario', usuario);
+    return this.http.get(this.pedidosUrl, { headers: HEADERS, params });
   }
 }
