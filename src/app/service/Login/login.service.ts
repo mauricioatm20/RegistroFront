@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -7,16 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
-  private baseUrl = 'http://34.244.212.188'; // Usa HTTP temporalmente
+  private url= 'https://34.244.212.188/autenticar';
 
-  constructor(private http: HttpClient) {} // Inyecta HttpClient correctamente
+  constructor(
+   private http: HttpClient
+  ) { }
+ login(usuario: string, password: string): Observable<any> {
+    const body = { usuario, password };
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  login(usuario: string, password: string): Observable<any> {
-    const url = `${this.baseUrl}/clientes/autenticar`;
-    const params = new HttpParams()
-      .set('usuario', usuario)
-      .set('password', password);
-
-    return this.http.get(url, { params }); // Acceso correcto a this.http
+    return this.http.post(this.url, body, { headers, withCredentials: true });
   }
 }
