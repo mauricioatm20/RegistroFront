@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente } from '../../model/Cliente';
 
-const BASE_URL = 'market.mauricioatm.click'; // Define la base del backend
+const BASE_URL = "https://market.mauricioatm.click"; // Define la base del backend
 const HEADERS = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 @Injectable({
