@@ -4,29 +4,33 @@ import { Injectable } from '@angular/core';
 import { CestaItem } from '../../model/CestaItem';
 
 
-const BASE_URL = 'https://market.mauricioatm.click'; // Define la base del backend
-const HEADERS = new HttpHeaders({ 'Content-Type': 'application/json' });
-
 @Injectable({
   providedIn: 'root'
 })
 export class ProcesarPedidoService {
-  private productosUrl = `${BASE_URL}:8084`;
-  private pedidosUrl = `${BASE_URL}:8002`;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  categorias(): Observable<any> {
-    return this.http.get(`${this.productosUrl}/categorias`, { headers: HEADERS });
+  categorias():Observable<any> {
+    let url = 'https://market.mauricioatm.click/categorias';
+    return this.http.get(url);
   }
 
-  productosCategorias(idCategoria: number): Observable<any> {
-    const params = new HttpParams().set('idCategoria', idCategoria.toString());
-    return this.http.get(`${this.productosUrl}/productos`, { headers: HEADERS, params });
+  productosCategorias(idCategoria:number):Observable<any> {
+    let url = 'https://market.mauricioatm.click/productos';
+    let params = new HttpParams();
+    params = params.append('idCategoria', idCategoria);
+    return this.http.get(url,{"params":params});
   }
 
-  enviarPedido(cesta: CestaItem[], usuario: string): Observable<any> {
-    const body = { usuario, cesta };
-    return this.http.post(`${this.pedidosUrl}/pedido`, body, { headers: HEADERS, withCredentials: true });
+  enviarPedido(cesta: CestaItem[], usuario:string):Observable<any>{
+    let url = 'https://market.mauricioatm.click/pedido';
+    let params= new HttpParams();
+    params=params.append("usuario", usuario)
+    return this.http.post(url,cesta,{"params":params})
+
   }
 }
+

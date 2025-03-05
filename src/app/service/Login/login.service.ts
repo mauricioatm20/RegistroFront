@@ -12,7 +12,8 @@ export class LoginService {
   ) { }
   login(usuario:string, password:string ): Observable<any>{
 
-    let url= "https://market.mauricioatm.click:8080/autenticar";
+    let url= "https://market.mauricioatm.click/autenticar";
+    //let url= 'http://localhost:8080/autenticar';
     let params = new HttpParams();
 
     params = params.append('usuario', usuario);
